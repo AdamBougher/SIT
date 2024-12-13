@@ -1,0 +1,56 @@
+.main-container {
+  display: flex;
+  height: 100vh; /* Make the main container take the full height of the viewport */
+}
+
+.stat-header {
+display: flex;
+justify-content: flex-end; /* Align items to the right */
+width: 100%; /* Ensure the container takes full width */
+gap: 8px; /* Optional: add some space between the items */
+}
+
+.stat-center {
+display: flex;
+justify-content: center; /* Center content horizontally */
+}
+
+.right{
+    display:  flexbox;
+    min-width: 50vw;
+}
+
+.top-container {
+    display: flex;
+    justify-content: space-between; /* Distribute space between the items */
+}
+
+.coreinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Align items to the right */
+    gap: 1em;
+    outline: #646cffaa 1px solid;
+    min-width: 10rem;
+    flex: 1;
+    padding-right: 10px;
+}
+
+.conditions {
+    display: flex;
+    flex: 2;
+    gap: 1em;
+    outline: #646cffaa 1px solid;
+    padding-left: 10px;
+}
+
+.CharacterPannel {
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    border: 1px solid #646cffaa; /* Optional: add a border for visual separation */
+    min-height: 275px;
+}
+
+  
+  
