@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Typography, Checkbox } from '@mui/material';
 import { Box } from '@mui/system';
 import { Label } from '@mui/icons-material';
+import { pink } from '@mui/material/colors';
 
 interface statsProps {
     name: string;
@@ -43,18 +44,31 @@ const Stat: React.FC<statProps> = ({ name, value, modifier, save})  => {
     };
         
     return (
-        <>  
+      <>  
+        <section className="stat-container">
+          <div className="stat-header">
             <Typography variant="h4">{name}</Typography>
-            <div className="horizontal-container">
-
+            <Checkbox {...Label} 
+            disabled color='info' 
+            sx={{
+              color: pink[800],
+              '&.Mui-checked': {
+                color: pink[600],
+              },
+              '&.Mui-disabled': {
+                color: pink[300],
+              },
+            }}
+            checked={save} 
+            />
+          </div>
+          <div className="stat-center">
             <Typography variant="h4" onClick={handleClick} style={{ cursor: 'pointer', outline: 1 }}>
-                {showValue ? value : "+" + modifier}
+              {showValue ? value : "+" + modifier}
             </Typography>
-            save: <Checkbox {...Label} disabled checked={save} />
-
-            </div>
-            
-        </>
+          </div>
+        </section>
+      </>
     );
 }
 
