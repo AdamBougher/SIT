@@ -1,75 +1,56 @@
-//componant to display D&D 5e stats
-
 import React, { useState } from 'react';
-import { Typography, Checkbox } from '@mui/material';
-import { Box } from '@mui/system';
-import { Label } from '@mui/icons-material';
+import { Typography, Checkbox, Box, Tooltip } from '@mui/material';
 import { pink } from '@mui/material/colors';
+import '../assets/main.css'; // Ensure the correct path to your CSS file
 
-interface statsProps {
-    name: string;
-    value: number;
-    save:  boolean;
+interface StatProps {
+  name: string;
+  value: number;
+  save: boolean;
+  creationMode?: boolean;
 }
 
-const stats: React.FC<statsProps> = ({name, value, save})  => {
+const Stats: React.FC<StatProps> = ({ name, value, save, creationMode }) => {
   return (
-    <>
-        <Box>
-            <Stat name={name} value={value} modifier={setMod(value)} save={save}/>
-        </Box>
-    </>
+    <Box>
+      <Stat name={name} value={value} modifier={setMod(value)} save={save} creationMode={creationMode} />
+    </Box>
   );
-}
+};
 
 function setMod(score: number): number {
-  let modifier = (score - 10) / 2;
-  modifier = Math.floor(modifier);
-  return modifier;
+  return Math.floor((score - 10) / 2);
 }
 
-interface statProps {
-    name: string;
-    value: number;
-    modifier: number;
-    save: boolean;
-}
+const Stat: React.FC<StatProps & { modifier: number }> = ({ name, value, modifier, save, creationMode }) => {
+  const [showValue, setShowValue] = useState(true);
 
+  const handleClick = () => {
+    setShowValue(!showValue);
+  };
 
-const Stat: React.FC<statProps> = ({ name, value, modifier, save})  => {
-    const [showValue, setShowValue] = useState(true);
+  return (
+    <section className="stat-container">
+      <div className="stat-header">
+        <Typography variant="h4">{name}</Typography>
+        {(
+          <Checkbox
+            checked={save}
+            color="info"
+            sx={{ color: pink[500] }
+          }
+          />
+        ) }
+      </div>
+      <div className="stat-center">
+        <Tooltip title={showValue ? "Click to Show Modifier" : "Click to Show Score"}>
+          <Typography variant="h4" onClick={handleClick} style={{ cursor: 'pointer', outline: 1 }}>
+            {showValue ? value : (modifier > 0 ? "+" + modifier : modifier)}
+          </Typography>
+        </Tooltip>
+      </div>
+    </section>
+  );
+};
 
-    const handleClick = () => {
-      setShowValue(!showValue);
-    };
-        
-    return (
-      <>  
-        <section className="stat-container">
-          <div className="stat-header">
-            <Typography variant="h4">{name}</Typography>
-            <Checkbox {...Label} 
-            disabled color='info' 
-            sx={{
-              color: pink[800],
-              '&.Mui-checked': {
-                color: pink[600],
-              },
-              '&.Mui-disabled': {
-                color: pink[300],
-              },
-            }}
-            checked={save} 
-            />
-          </div>
-          <div className="stat-center">
-            <Typography variant="h4" onClick={handleClick} style={{ cursor: 'pointer', outline: 1 }}>
-              {showValue ? value : "+" + modifier}
-            </Typography>
-          </div>
-        </section>
-      </>
-    );
-}
-
-export default stats;
+export default Stats;
