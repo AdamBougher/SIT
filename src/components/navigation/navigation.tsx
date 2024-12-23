@@ -1,48 +1,43 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
+import React, { useState } from 'react';
+import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import HomeIcon from '@mui/icons-material/Home';
+import { useNavigate } from 'react-router-dom';
 
-export default function nav() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
+const Navigation: React.FC = () => {
+  const [value, setValue] = useState(0);
+  const navigate = useNavigate();
+
+  const handleNavigationChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+    switch (newValue) {
+      case 0:
+        navigate('/');
+        break;
+      case 1:
+        navigate('/create-character');
+        break;
+      default:
+        navigate('/');
+    }
   };
 
   return (
-    <div>
-      <Button
-        id="demo-positioned-button"
-        aria-controls={open ? 'demo-positioned-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        Dashboard
-      </Button>
-      <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-      >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
-      </Menu>
-    </div>
+    <BottomNavigation
+      value={value}
+      onChange={handleNavigationChange}
+      sx={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: 'transparent', // Set background to transparent
+      }}
+    >
+      <BottomNavigationAction label="Home" icon={<HomeIcon />} />
+      <BottomNavigationAction label="Add Character" icon={<AddCircleIcon />} />
+    </BottomNavigation>
   );
-}
+};
+
+export default Navigation;
