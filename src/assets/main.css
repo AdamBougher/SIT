@@ -3,11 +3,31 @@
   height: 100vh; /* Make the main container take the full height of the viewport */
 }
 
+.stat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
 .stat-header {
-display: flex;
-justify-content: flex-end; /* Align items to the right */
-width: 100%; /* Ensure the container takes full width */
-gap: 8px; /* Optional: add some space between the items */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.stat-header .MuiTypography-root {
+  margin-right: 10px; /* Adjust spacing as needed */
+}
+
+.stat-header .MuiCheckbox-root {
+  margin-left: auto;
+}
+
+.stat-value {
+  text-align: center;
+  margin-top: 5px; /* Adjust spacing as needed */
 }
 
 .stat-center {
@@ -27,7 +47,6 @@ justify-content: center; /* Center content horizontally */
 
 .coreinfo {
     display: flex;
-    flex-direction: column;
     align-items: flex-end; /* Align items to the right */
     gap: 1em;
     outline: #646cffaa 1px solid;
@@ -49,8 +68,42 @@ justify-content: center; /* Center content horizontally */
     justify-content: center; /* Center content horizontally */
     align-items: center; /* Center content vertically */
     border: 1px solid #646cffaa; /* Optional: add a border for visual separation */
-    min-height: 275px;
+    min-height: 480px;
 }
 
-  
-  
+.stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    outline: #646cffaa 1px solid;
+    padding: 10px;
+}
+
+.bottom-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensure it is above other elements */
+}
+
+.shield-container {
+  position: relative;
+  width: 95px;
+  height: 95px;
+}
+
+.shield-image {
+  width: 100%;
+  height: 100%;
+}
+
+.ac-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white; /* Adjust the color as needed */
+  font-size: 1.2rem; /* Adjust the font size as needed */
+  text-align: center;
+}
